@@ -7,4 +7,4 @@ The application supports common IDE functionalities such as creating/switching w
 ![Alt text](images/GraphicsEditor.png?raw=true "")
 
 ## Download
-<a href="/stefanGT44/GeRuDok/raw/master/executable/GeRuDok.jar" download>Click to Download</a>
+<a href="/executable/GeRuDok.jar" download>Click to Download</a>
