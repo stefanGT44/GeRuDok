@@ -1,5 +1,5 @@
 # GeRuDok
-This project represents an IDE-like desktop application for graphics and text document handling written in Java, using the Swing toolkit for the GUI, with a heavy focus on various design patterns.
+This project represents an IDE-like desktop application for graphics and text document handling.It is written in Java, using the Swing toolkit for the GUI, with a heavy focus on various design patterns.
 
 ## Overview
 The application supports common IDE functionalities such as creating/switching workspaces, rendering the project tree, importing/exporting projects, sharing documents between projects etc. A Project contains text/graphics elements that the user can edit with the text/graphics editor.
