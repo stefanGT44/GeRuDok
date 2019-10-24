@@ -22,7 +22,7 @@ The application supports common IDE functionalities such as creating/switching w
   * Multiple select
   * Cut/copy/paste
   * Undo/redo
-* Editing text in a text element using the text editor
+* Writing text in a text element using the text editor
   * Bold/italic/underline
   * Font type size and color
   * Subscript/superscript
