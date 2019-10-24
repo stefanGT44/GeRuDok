@@ -1,0 +1,33 @@
+package Actions;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.KeyStroke;
+
+import com.sun.glass.events.KeyEvent;
+
+import DataView.DocumentView;
+import DataView.ElementView;
+import DataView.PageView;
+import DataView.ProjectView;
+import DataView.SlotView;
+import DataView.WorkspaceView;
+import MVC.View;
+
+public class CircleAction extends AbstractActionManager {
+
+	public CircleAction() {
+
+		putValue(SMALL_ICON, loadIcon("images/CircleAction.png"));
+		putValue(NAME, "Circle");
+		putValue(SHORT_DESCRIPTION, "Create circle");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		ElementView ev = View.get().getGraphicEditor().getEv();
+		ev.getMainElement().startCircleState();
+
+	}
+
+}

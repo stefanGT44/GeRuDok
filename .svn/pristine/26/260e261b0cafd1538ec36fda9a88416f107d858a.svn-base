@@ -1,0 +1,21 @@
+package StateActions;
+
+import java.awt.event.MouseEvent;
+
+public class State {
+
+	   public void mousePressed(MouseEvent e) {
+	      // TODO: implement
+	   }
+	   
+
+	   public void mouseDragged(MouseEvent e) {
+	      // TODO: implement
+	   }
+	   
+
+	   public void mouseReleased(MouseEvent e) {
+	      // TODO: implement
+	   }
+
+	}

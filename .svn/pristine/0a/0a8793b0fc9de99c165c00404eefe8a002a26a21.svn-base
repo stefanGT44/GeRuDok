@@ -1,0 +1,8 @@
+package Workspace;
+
+public interface DataType {
+
+	public void add();
+	public void delete();
+	
+}

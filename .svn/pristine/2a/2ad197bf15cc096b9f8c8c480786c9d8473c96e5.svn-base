@@ -1,0 +1,69 @@
+package Actions;
+
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JTextPane;
+
+import DataView.ElementView;
+import DataView.PageView;
+import DataView.SlotView;
+import GUI_Elements.ResizablePanel;
+
+public class mouseAdapterRP extends MouseAdapter {
+
+	public void mousePressed(MouseEvent e) {
+		if (e.getSource() instanceof ResizablePanel) {
+			ResizablePanel res = (ResizablePanel) e.getSource();
+
+			if (res.contains(e.getPoint())) {
+				res.dX = e.getLocationOnScreen().x - res.getX();
+				res.dY = e.getLocationOnScreen().y - res.getY();
+			}
+			res.dragLocation = e.getPoint();
+			if (res.dragLocation.getX() > res.getWidth() - 10 && res.dragLocation.getY() > res.getHeight() - 10)
+				res.drag = true;
+			if (!res.drag)
+				res.setBackground(Color.GRAY);
+
+			if (e.getSource() instanceof SlotView) {
+				PageView pv = (PageView) ((SlotView) e.getSource()).getParent();
+				SlotView sv = (SlotView) e.getSource();
+
+				pv.update(null, pv.getSlotViews().indexOf(sv));
+			}
+		}
+
+		if (e.getSource() instanceof JTextPane) {
+			ElementView res = ((ElementView) ((JTextPane) e.getSource()).getParent());
+
+			if (res.contains(e.getPoint())) {
+				res.dX = e.getLocationOnScreen().x - res.getX();
+				res.dY = e.getLocationOnScreen().y - res.getY();
+			}
+			res.dragLocation = e.getPoint();
+			if (res.dragLocation.getX() > res.getWidth() - 10 && res.dragLocation.getY() > res.getHeight() - 10)
+				res.drag = true;
+			if (!res.drag)
+				res.setBackground(Color.GRAY);
+		}
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		if (e.getSource() instanceof ResizablePanel) {
+			((ResizablePanel) e.getSource()).drag = false;
+			((ResizablePanel) e.getSource()).setBackground(Color.LIGHT_GRAY);
+			((ResizablePanel) e.getSource()).revalidate();
+			((ResizablePanel) e.getSource()).repaint();
+		}
+
+		if (e.getSource() instanceof JTextPane) {
+			((ResizablePanel) ((JTextPane) e.getSource()).getParent()).drag = false;
+			((ResizablePanel) ((JTextPane) e.getSource()).getParent()).setBackground(Color.LIGHT_GRAY);
+			((ResizablePanel) ((JTextPane) e.getSource()).getParent()).revalidate();
+			((ResizablePanel) ((JTextPane) e.getSource()).getParent()).repaint();
+		}
+	}
+
+}

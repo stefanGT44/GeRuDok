@@ -1,0 +1,134 @@
+package Workspace;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Observable;
+
+import javax.swing.SwingUtilities;
+import javax.swing.tree.TreeNode;
+
+import DataView.DocumentView;
+import DataView.ProjectView;
+import MVC.View;
+import MVC.WorkspaceModel;
+
+public class Project extends Observable implements TreeNode, DataType, Serializable {
+
+	
+	private ArrayList<Document> documents = new ArrayList<>();
+	private String name;
+	
+
+	public Project() {
+
+	}
+
+	@Override
+	public void add() {
+		addDocument();
+	}
+
+	public void addDocument() {
+		Document document = new Document();
+		documents.add(document);
+		if (document.getParent() == null)
+			document.setMetaParent(this);
+		document.setName("Document - " + documents.size());
+
+		setChanged();
+		notifyObservers(document);
+	}
+
+	public void addSharedDocument(Document document) {
+		documents.add(document);
+		if (!document.getName().contains(" - (shared)"))
+			document.setName(document.getName() + (" - (shared)"));
+		setChanged();
+		notifyObservers(document);
+	}
+
+	public void removeAllDocument() {
+		if (documents != null)
+			documents.clear();
+		setChanged();
+		notifyObservers();
+	}
+
+	public void setName(String name) {
+		this.name = name;
+		setChanged();
+		notifyObservers(name);
+	}
+
+	@Override
+	public Enumeration children() {
+		return (Enumeration) documents;
+	}
+
+	@Override
+	public boolean getAllowsChildren() {
+		return true;
+	}
+
+	@Override
+	public TreeNode getChildAt(int childIndex) {
+		return (TreeNode) documents.get(childIndex);
+	}
+
+	@Override
+	public int getChildCount() {
+		return documents.size();
+	}
+
+	@Override
+	public int getIndex(TreeNode node) {
+		return documents.indexOf((Document) node);
+	}
+
+	@Override
+	public TreeNode getParent() {
+		return WorkspaceModel.workspace;
+	}
+
+	@Override
+	public boolean isLeaf() {
+		if (documents.isEmpty())
+			return true;
+		else
+			return false;
+	}
+
+	public String toString() {
+		return this.name;
+	}
+
+	public ArrayList<Document> getDocuments() {
+		return documents;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void isFocused(boolean b) {
+		setChanged();
+		notifyObservers(b);
+	}
+
+	public void focusTab(int x) {
+		setChanged();
+		notifyObservers(x);
+	}
+
+	public void update() {
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void importDocument(Document document)
+	{
+		setChanged();
+		notifyObservers(document);
+	}
+}

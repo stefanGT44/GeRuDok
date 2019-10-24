@@ -1,0 +1,34 @@
+package Actions;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+
+import com.sun.glass.events.KeyEvent;
+
+import MVC.View;
+import Workspace.DataType;
+import Workspace.Document;
+import Workspace.Project;
+
+public class NewDocumentAction extends AbstractActionManager {
+
+	public NewDocumentAction() {
+
+		putValue(SMALL_ICON, loadIcon("images/addDocumentIcon.png"));
+		putValue(NAME, "New Document");
+		putValue(SHORT_DESCRIPTION, "New Document");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+
+		Object p = View.get().getModel().getWorkspaceTree().getLastSelectedPathComponent();
+		if (p instanceof DataType){
+			((DataType) p).add();
+		}
+
+	}
+
+}

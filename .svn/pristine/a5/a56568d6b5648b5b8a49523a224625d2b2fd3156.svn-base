@@ -1,0 +1,22 @@
+package Actions;
+
+import java.awt.event.ActionEvent;
+
+public class DeleteAction extends AbstractActionManager{
+
+	public DeleteAction() {
+
+		putValue(SMALL_ICON, loadIcon("images/delete.png"));
+		putValue(NAME, "Delete");
+		putValue(SHORT_DESCRIPTION, "Delete Action");
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		System.out.println("DELETE");
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,29 @@
+package Actions;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.SwingUtilities;
+
+import DataView.ElementPopupChooser;
+import MVC.View;
+import Workspace.DataType;
+import Workspace.Slot;
+
+public class NewElementAction extends AbstractActionManager {
+
+	public NewElementAction() {
+		putValue(SMALL_ICON, loadIcon("images/addIcon.png"));
+		putValue(NAME, "New Element");
+		putValue(SHORT_DESCRIPTION, "New Element");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Object p = View.get().getModel().getWorkspaceTree().getLastSelectedPathComponent();
+		if (p instanceof DataType){
+			((DataType) p).add();
+		}
+
+	}
+
+}

@@ -1,0 +1,46 @@
+package commands;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
+
+import MVC.View;
+import Workspace.Element;
+import Workspace.MainElement;
+
+public class DeleteCommand extends AbstractCommand implements Serializable{
+	
+	private MainElement mainElement;
+	private ArrayList<Element> elements = new ArrayList<>();
+
+	public DeleteCommand(MainElement mainElement, ArrayList<Element> elements) {
+		super();
+		this.mainElement = mainElement;
+		for(Element el : elements)
+		{
+			this.elements.add(el);
+		}
+	}
+
+	@Override
+	public void doCommand() {
+		for (Element element:elements){
+			View.get().getGraphicEditor().getEv().getMainElement().getPaint().remove(element);
+		}
+		View.get().getGraphicEditor().getEv().getMainElement().update();
+		View.get().getGraphicEditor().update();
+		SwingUtilities.updateComponentTreeUI(View.get().getModel().getWorkspaceTree());
+	}
+
+	@Override
+	public void undoCommand() {
+		for (Element element:elements){
+			View.get().getGraphicEditor().getEv().getMainElement().getPaint().add(element);
+		}
+		View.get().getGraphicEditor().getEv().getMainElement().update();
+		View.get().getGraphicEditor().update();
+		SwingUtilities.updateComponentTreeUI(View.get().getModel().getWorkspaceTree());
+	}
+
+}

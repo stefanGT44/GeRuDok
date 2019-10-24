@@ -1,0 +1,27 @@
+package MVC;
+
+public class Model {
+
+	private WorkspaceTree workspaceTree;
+	private WorkspaceModel workspaceModel;
+
+	public Model() {
+		initializeWorkspaceTree();
+		System.out.println("Model initialized...");
+	}
+
+	public void initializeWorkspaceTree() {
+		workspaceTree = new WorkspaceTree();
+		workspaceModel = new WorkspaceModel();
+		workspaceTree.setModel(workspaceModel);
+	}
+
+	public WorkspaceTree getWorkspaceTree() {
+		return workspaceTree;
+	}
+
+	public WorkspaceModel getWorkspaceModel() {
+		return workspaceModel;
+	}
+
+}

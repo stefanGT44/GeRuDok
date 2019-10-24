@@ -1,0 +1,103 @@
+package Actions;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import javax.swing.KeyStroke;
+
+import DataView.DocumentView;
+import DataView.ElementView;
+import DataView.PageView;
+import DataView.ProjectView;
+import DataView.SlotView;
+import MVC.View;
+import Workspace.Project;
+
+public class ExportAction extends AbstractActionManager{	
+	
+	
+	public ExportAction() {
+
+		putValue(SMALL_ICON, loadIcon("images/export.png"));
+		putValue(NAME, "Export");
+		putValue(SHORT_DESCRIPTION, "Eport Application");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {		
+		
+		View.get().getActionManager().getBrowseAction().setAction("export");
+		View.get().getActionManager().getBrowseAction().actionPerformed(null);
+		
+	}
+	
+	public void export(String location)
+	{
+		Project proba = (Project)View.get().getModel().getWorkspaceTree().getLastSelectedPathComponent();
+		ProjectView projectvju=null;
+		
+		for(ProjectView pv: View.get().getWorkspaceView().getProjectViews()){
+			if(pv.getProject()==proba){
+				projectvju = pv;
+				System.out.println("Pronadjeno");
+				break;
+			}
+		}
+		
+		File f = new File(location + "\\" + projectvju.getProject().getName() + ".gpr");
+		ObjectOutputStream oos1 = null;
+		try {
+			oos1 = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try{
+			oos1.writeObject(projectvju);
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		finally{
+			try {
+				oos1.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
+		
+		for(DocumentView dv : projectvju.getDocumentViews())
+		{
+			for(PageView pv : dv.getPageViews())
+			{
+				for(SlotView sv : pv.getSlotViews())
+				{
+					for(ElementView ev : sv.getElementViews())
+					{
+						ev.getTextPane().setForeground(ev.getMainElement().getsColor());
+						Font font = ev.getTextPane().getFont();
+						ev.getTextPane().setFont(new Font(font.getFontName(), font.getStyle(),ev.getMainElement().getFontIndex()));
+						//ev.getTextPane().setFont(ev.getMainElement().getFont());
+
+						ev.getMainElement().update();
+						ev.getTextPane().repaint();
+						ev.repaint();
+					}
+				}
+			}
+		}
+		projectvju.setFrameIcon(null);
+	}
+
+	
+	
+	
+}

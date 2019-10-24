@@ -1,0 +1,43 @@
+package commands;
+
+import java.awt.Point;
+import java.io.Serializable;
+
+import javax.swing.SwingUtilities;
+
+import MVC.View;
+import Workspace.Element;
+import Workspace.MainElement;
+
+public class AddShapeCommand extends AbstractCommand implements Serializable{
+	
+	private MainElement mainElement;
+	private Point lastPosition;
+	private Element element;
+
+	public AddShapeCommand(MainElement mainElement, Point lastPosition, Element element) {
+		super();
+		this.mainElement = mainElement;
+		this.lastPosition = lastPosition;
+		this.element = element;
+	}
+
+	@Override
+	public void doCommand() {
+		View.get().getGraphicEditor().getEv().getMainElement().getPaint().add(element);
+		
+		View.get().getGraphicEditor().getEv().getMainElement().update();
+		View.get().getGraphicEditor().update();
+		SwingUtilities.updateComponentTreeUI(View.get().getModel().getWorkspaceTree());
+	}
+
+	@Override
+	public void undoCommand() {
+		View.get().getGraphicEditor().getEv().getMainElement().getPaint().remove(element);
+		
+		View.get().getGraphicEditor().getEv().getMainElement().update();
+		View.get().getGraphicEditor().update();
+		SwingUtilities.updateComponentTreeUI(View.get().getModel().getWorkspaceTree());
+	}
+
+}

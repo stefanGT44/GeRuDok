@@ -1,0 +1,26 @@
+package Actions;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.KeyStroke;
+
+import com.sun.glass.events.KeyEvent;
+
+public class Open extends AbstractActionManager{
+	
+	public Open(){
+		putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke(
+		        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		putValue(SMALL_ICON, loadIcon("images/import.png"));
+		
+		putValue(NAME, "Open");
+		putValue(SHORT_DESCRIPTION, "Open a new workspace");
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

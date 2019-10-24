@@ -1,0 +1,23 @@
+package Actions;
+
+import java.awt.event.ActionEvent;
+
+import DataView.ElementView;
+import MVC.View;
+
+public class Paste extends AbstractActionManager {
+
+	public Paste() {
+		putValue(SMALL_ICON, loadIcon("images/paste.png"));
+		putValue(NAME, "Paste");
+		putValue(SHORT_DESCRIPTION, "Paste action");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		ElementView ev = View.get().getGraphicEditor().getEv();
+		ev.getMainElement().startPasteState();
+
+	}
+
+}

@@ -1,0 +1,21 @@
+package GUI_Elements;
+
+import javax.swing.JToolBar;
+
+import MVC.View;
+
+public class ToolBar extends JToolBar{
+	
+	public ToolBar(){
+		super();
+		this.setFloatable(false);
+		add(View.get().getActionManager().getNewObjectAction());
+		addSeparator();
+		add(View.get().getActionManager().getShareAction());
+		addSeparator();
+		add(View.get().getActionManager().getImportAction());
+		addSeparator();
+		add(View.get().getActionManager().getSwitchWorkspace());
+	}
+
+}

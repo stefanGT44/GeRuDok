@@ -1,0 +1,73 @@
+package GUI_Elements;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import MVC.View;
+
+public class IELocationWindow extends JDialog{
+	
+	private JPanel panel;
+	private JTextField tf;
+	
+	public IELocationWindow()
+	{
+		super(View.get());
+
+		setTitle("Choose Location");
+		setModal(true);
+		setSize(400, 100);
+		this.setResizable(false);
+	
+		
+		panel = new JPanel();
+		setContentPane(panel);
+		panel.setLayout(new BorderLayout());
+		tf = new JTextField();
+		tf.setFocusable(false);
+		
+		JPanel p = new JPanel();
+		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
+		
+		JButton browse = new JButton("Browse");
+		browse.addActionListener(View.get().getActionManager().getBrowseAction());
+
+		
+		p.add(tf);
+		p.add(Box.createHorizontalStrut(10));
+		p.add(browse);
+		
+		
+		
+		panel.add(Box.createHorizontalStrut(20), BorderLayout.WEST);
+		panel.add(Box.createHorizontalStrut(20), BorderLayout.EAST);
+		panel.add(Box.createVerticalStrut(30), BorderLayout.SOUTH);
+		panel.add(Box.createVerticalStrut(20), BorderLayout.NORTH);
+		panel.add(p, BorderLayout.CENTER);
+
+		
+		p.setBackground(Color.GRAY);
+		panel.setBackground(Color.GRAY);
+		this.setVisible(false);
+		this.setLocationRelativeTo(null);
+		
+	}
+
+	public JTextField getTf() {
+		return tf;
+	}
+
+	public void setTf(JTextField tf) {
+		this.tf = tf;
+	}
+
+	
+}
