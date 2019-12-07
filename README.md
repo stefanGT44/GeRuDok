@@ -44,4 +44,4 @@ This project was an assignment as part of the course - Software design in the 2n
 You can download the .jar file [here](executable/GeRuDok.jar).
 
 ## Contributors
-- Stefan Ginic <stefangwars@gmail.com>
+- Stefan Ginic - <stefangwars@gmail.com>
