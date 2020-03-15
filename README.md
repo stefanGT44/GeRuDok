@@ -1,4 +1,4 @@
-# GeRuDok
+# Generic-Document-Handler
 This project represents an IDE-like desktop application for graphics and text document handling. It is written in Java, using the Swing toolkit for the GUI, with a heavy focus on various design patterns.
 
 ## Overview
