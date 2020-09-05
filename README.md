@@ -38,7 +38,7 @@ Java's serialization is used for storing projects.<br><br>
 When sharing a document between projects, the document view (implements interface Cloneable) is cloned but points to the same model, so any changes to the model are being rendered simultaneously in all projects.
 
 ## Sidenote
-This project was an assignment as part of the course - Software design in the 3rd semester at the Faculty of Computer Science in Belgrade.
+This project was an assignment as part of the course - Software design during the 3rd semester at the Faculty of Computer Science in Belgrade.
 
 ## Download
 You can download the .jar file [here](executable/GeRuDok.jar).
